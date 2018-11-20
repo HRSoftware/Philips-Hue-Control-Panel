@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Group.cs" />
+    <Compile Include="LightRootObject.cs" />
     <Compile Include="MainApp.cs">
       <SubType>Form</SubType>
     </Compile>

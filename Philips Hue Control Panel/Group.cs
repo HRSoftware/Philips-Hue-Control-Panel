@@ -24,8 +24,8 @@ namespace Philips_Hue_Control_Panel
       
         public GroupType enumGroupType;
 
-        public SmartLight[] groupSmartLights;
+        public SmartLight[] smartLights;
 
-        private
+        
     }
 }
