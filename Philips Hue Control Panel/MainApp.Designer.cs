@@ -30,6 +30,9 @@
         {
             this.dataSet1 = new System.Data.DataSet();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnOn = new System.Windows.Forms.Button();
+            this.txtBox = new System.Windows.Forms.RichTextBox();
+            this.btnOff = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -45,17 +48,48 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.DataSource = this.dataSet1;
-            this.dataGridView1.Location = new System.Drawing.Point(535, 130);
+            this.dataGridView1.Location = new System.Drawing.Point(614, 104);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(240, 150);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // btnOn
+            // 
+            this.btnOn.Location = new System.Drawing.Point(183, 149);
+            this.btnOn.Name = "btnOn";
+            this.btnOn.Size = new System.Drawing.Size(75, 23);
+            this.btnOn.TabIndex = 1;
+            this.btnOn.Text = "Turn on";
+            this.btnOn.UseVisualStyleBackColor = true;
+            this.btnOn.Click += new System.EventHandler(this.btnOn_Click);
+            // 
+            // txtBox
+            // 
+            this.txtBox.Location = new System.Drawing.Point(159, 323);
+            this.txtBox.Name = "txtBox";
+            this.txtBox.Size = new System.Drawing.Size(459, 151);
+            this.txtBox.TabIndex = 2;
+            this.txtBox.Text = "";
+            // 
+            // btnOff
+            // 
+            this.btnOff.Location = new System.Drawing.Point(183, 178);
+            this.btnOff.Name = "btnOff";
+            this.btnOff.Size = new System.Drawing.Size(74, 21);
+            this.btnOff.TabIndex = 3;
+            this.btnOff.Text = "Turn Off";
+            this.btnOff.UseVisualStyleBackColor = true;
+            this.btnOff.Click += new System.EventHandler(this.btnOff_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(952, 512);
+            this.Controls.Add(this.btnOff);
+            this.Controls.Add(this.txtBox);
+            this.Controls.Add(this.btnOn);
             this.Controls.Add(this.dataGridView1);
             this.Name = "MainForm";
             this.Text = "Form1";
@@ -68,7 +102,10 @@
         #endregion
 
         public System.Data.DataSet dataSet1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        public System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnOn;
+        private System.Windows.Forms.RichTextBox txtBox;
+        private System.Windows.Forms.Button btnOff;
     }
 }
 

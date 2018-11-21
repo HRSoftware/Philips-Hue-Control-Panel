@@ -12,22 +12,22 @@ namespace Philips_Hue_Control_Panel
     class Hub
     {
 
-        public Hub(string newIPAddress, string User)
+        public Hub(string _baseURL)
         {
-            ipAddress = IPAddress.Parse(newIPAddress);
-            username = User;
+            baseURL = _baseURL;
+           
             initListOfLights();
-
-            
-            
         }
         
-        public IPAddress ipAddress;
-        private string username;
+        public string baseURL
+        {
+            get; set;
+        }
+        
        
-        private List<SmartLight> allLights = new List<SmartLight>();
+        private Dictionary<int, SmartLight> allLights = new Dictionary<int, SmartLight>();
 
-        public List<SmartLight> getAllLights()
+        public Dictionary<int, SmartLight> getAllLights()
         {
             if(allLights.Count == 0)
             {
@@ -38,31 +38,37 @@ namespace Philips_Hue_Control_Panel
            
             
         }
+        public SmartLight getSingleLight(int id)
+        {
+            return allLights[id];
+        }
         
-        public async void initListOfLights()
+        public void initListOfLights()
         {
 
-            string address = "http://"+ ipAddress + "/api/" + username + "/lights";
+       
 
 
 
 
-            string json = new WebClient().DownloadString(address);
+            string json = new WebClient().DownloadString(baseURL + "/lights/");
             var response = JsonConvert.DeserializeObject<Dictionary<int, SmartLight>>(json);
-            foreach(var item in response.Values)
+            foreach(var item in response)
             {
-                SmartLight tempSmartLight = new SmartLight();
+                SmartLight tempSmartLight = new SmartLight(baseURL + "/lights/");
 
-                tempSmartLight.lightState = item.lightState;
-                tempSmartLight.lightState.bri = item.lightState.bri;
-                tempSmartLight.lightState.on = item.lightState.on;
+                tempSmartLight.lightID = item.Key;
+                tempSmartLight.lightState = item.Value.lightState;
+               // tempSmartLight.lightState.bri = item.Value.lightState.bri;
+               // tempSmartLight.lightState.on = item.Value.lightState.on;
                 
-                tempSmartLight.lightState.hue = item.lightState.hue;
-                tempSmartLight.lightState.sat = item.lightState.sat;
-                tempSmartLight.lightState.effect = item.lightState.effect;
-                tempSmartLight.lightState.reachable = item.lightState.reachable;
+               // tempSmartLight.lightState.hue = item.Value.lightState.hue;
+               // tempSmartLight.lightState.sat = item.Value.lightState.sat;
+               // tempSmartLight.lightState.effect = item.Value.lightState.effect;
+               // tempSmartLight.lightState.reachable = item.Value.lightState.reachable;
+               
 
-                allLights.Add(tempSmartLight);
+                allLights[item.Key] = tempSmartLight; 
 
             }
             
@@ -70,5 +76,16 @@ namespace Philips_Hue_Control_Panel
             
         }
 
+        public string TurnOnLight(int id)
+        {
+                return allLights[id].turnOn();
+            
+        }
+
+        public string TurnOffLight(int id)
+        {
+            return allLights[id].turnOff();
+
+        }
     }
 }
